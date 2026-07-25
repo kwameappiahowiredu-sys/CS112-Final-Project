@@ -1,0 +1,52 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="Page-1" id="ZxOJxc5xiulSIXHlhaYG">
+    <mxGraphModel dx="902" dy="623" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="-ExOlfR2WQkNd2dGn6fh-24" edge="1" parent="1" source="-ExOlfR2WQkNd2dGn6fh-9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;" target="-ExOlfR2WQkNd2dGn6fh-18">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="-ExOlfR2WQkNd2dGn6fh-9" parent="1" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;" value="Administrator&lt;div&gt;&lt;br&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="60" width="30" x="120" y="120" as="geometry" />
+        </mxCell>
+        <mxCell id="-ExOlfR2WQkNd2dGn6fh-25" edge="1" parent="1" source="-ExOlfR2WQkNd2dGn6fh-10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;" target="-ExOlfR2WQkNd2dGn6fh-19">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="-ExOlfR2WQkNd2dGn6fh-10" parent="1" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;" value="Engineer" vertex="1">
+          <mxGeometry height="60" width="30" x="120" y="240" as="geometry" />
+        </mxCell>
+        <mxCell id="-ExOlfR2WQkNd2dGn6fh-26" edge="1" parent="1" source="-ExOlfR2WQkNd2dGn6fh-11" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;" target="-ExOlfR2WQkNd2dGn6fh-20">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="-ExOlfR2WQkNd2dGn6fh-11" parent="1" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;" value="Technician" vertex="1">
+          <mxGeometry height="60" width="30" x="120" y="360" as="geometry" />
+        </mxCell>
+        <mxCell id="-ExOlfR2WQkNd2dGn6fh-27" edge="1" parent="1" source="-ExOlfR2WQkNd2dGn6fh-15" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;" target="-ExOlfR2WQkNd2dGn6fh-21">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="-ExOlfR2WQkNd2dGn6fh-15" parent="1" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;" value="Customer Service" vertex="1">
+          <mxGeometry height="60" width="30" x="120" y="480" as="geometry" />
+        </mxCell>
+        <mxCell id="-ExOlfR2WQkNd2dGn6fh-17" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="" vertex="1">
+          <mxGeometry height="560" width="355.94" x="364.06" y="25" as="geometry" />
+        </mxCell>
+        <mxCell id="-ExOlfR2WQkNd2dGn6fh-18" parent="1" style="ellipse;whiteSpace=wrap;html=1;" value="&lt;ul&gt;&lt;li&gt;&lt;font style=&quot;font-size: 15px;&quot;&gt;Login&lt;br&gt;&lt;/font&gt;&lt;/li&gt;&lt;li&gt;&lt;font style=&quot;font-size: 15px;&quot;&gt;Manage Users&lt;br&gt;&lt;/font&gt;&lt;/li&gt;&lt;li&gt;&lt;font style=&quot;font-size: 15px;&quot;&gt;Create Work Orders&lt;br&gt;&lt;/font&gt;&lt;/li&gt;&lt;li&gt;&lt;font style=&quot;font-size: 15px;&quot;&gt;Assign Technician&lt;br&gt;&lt;/font&gt;&lt;/li&gt;&lt;li&gt;&lt;font style=&quot;font-size: 15px;&quot;&gt;View Dashboard&lt;/font&gt;&lt;br&gt;&lt;/li&gt;&lt;/ul&gt;" vertex="1">
+          <mxGeometry height="95" width="335.32" x="364.06" y="102.5" as="geometry" />
+        </mxCell>
+        <mxCell id="-ExOlfR2WQkNd2dGn6fh-19" parent="1" style="ellipse;whiteSpace=wrap;html=1;" value="&lt;ul&gt;&lt;li&gt;&lt;font style=&quot;font-size: 15px;&quot;&gt;Report Outage&lt;br&gt;&lt;/font&gt;&lt;/li&gt;&lt;li&gt;&lt;font style=&quot;font-size: 15px;&quot;&gt;View Grid Status&lt;br&gt;&lt;/font&gt;&lt;/li&gt;&lt;li&gt;&lt;font style=&quot;font-size: 15px;&quot;&gt;Generate Reports&lt;/font&gt;&lt;br&gt;&lt;/li&gt;&lt;/ul&gt;" vertex="1">
+          <mxGeometry height="95" width="325.94" x="364.06" y="222.5" as="geometry" />
+        </mxCell>
+        <mxCell id="-ExOlfR2WQkNd2dGn6fh-20" parent="1" style="ellipse;whiteSpace=wrap;html=1;" value="&lt;ul&gt;&lt;li&gt;&lt;font style=&quot;font-size: 15px;&quot;&gt;View Assigned Jobs&lt;/font&gt;&lt;/li&gt;&lt;li&gt;&lt;font style=&quot;font-size: 15px;&quot;&gt;Update Repair Status&lt;/font&gt;&lt;/li&gt;&lt;/ul&gt;" vertex="1">
+          <mxGeometry height="90" width="330" x="364.06" y="345" as="geometry" />
+        </mxCell>
+        <mxCell id="-ExOlfR2WQkNd2dGn6fh-21" parent="1" style="ellipse;whiteSpace=wrap;html=1;" value="&lt;ul&gt;&lt;li&gt;&lt;font style=&quot;font-size: 15px;&quot;&gt;View Complaints&lt;/font&gt;&lt;/li&gt;&lt;li&gt;&lt;font style=&quot;font-size: 15px;&quot;&gt;Respond to Complaints&lt;/font&gt;&lt;/li&gt;&lt;li&gt;&lt;font style=&quot;font-size: 15px;&quot;&gt;Notify and Update Customers&lt;/font&gt;&lt;/li&gt;&lt;/ul&gt;" vertex="1">
+          <mxGeometry height="85" width="345.94" x="364.06" y="467.5" as="geometry" />
+        </mxCell>
+        <mxCell id="-ExOlfR2WQkNd2dGn6fh-22" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="&lt;font style=&quot;font-size: 18px;&quot;&gt;GridCare-Lite&lt;/font&gt;" vertex="1">
+          <mxGeometry height="40" width="140" x="465" y="40" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
