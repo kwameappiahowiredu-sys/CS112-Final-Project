@@ -1,9 +1,9 @@
 """
 Synthetic dataset generator for the National Electricity Grid Network Analysis project.
-Produces three CSVs in the same spirit as the OpenFlights airlines/airports/routes trio:
-    utilities.csv    (like airlines.csv)
-    substations.csv  (like airports.csv)
-    lines.csv        (like routes.csv)
+Produces three CSVs
+    utilities.csv    
+    substations.csv  
+    lines.csv        
  
 Grounded in Ghana's grid (ECG, NEDCo, GRIDCo, VRA) with cross-border interconnections
 reflecting the real West African Power Pool (WAPP).
@@ -13,8 +13,6 @@ import math
 import random
  
 random.seed(42)
- 
-
 utilities = [
     # utility_id, name, alias, code, type, country, active
     (1, "Electricity Company of Ghana", "ECG", "ECG", "Distribution", "Ghana", "Y"),
@@ -28,7 +26,6 @@ utilities = [
     (9, "Sonabel", "SONABEL", "SNB", "Distribution", "Burkina Faso", "Y"),
     (10, "Enclave Power Company", "EPC", "EPC", "Generation", "Ghana", "N"),
 ]
- 
 
 ghana_regions = {
     "Greater Accra": [("Achimota", 5.614, -0.224), ("Tema", 5.669, -0.017),
@@ -107,7 +104,6 @@ lines = []
 lid = 1
 seen_pairs = set()
  
-
 for region, places in ghana_regions.items():
     ids_in_region = [name_to_id[n] for n, _, _ in places]
     for i, a in enumerate(ids_in_region):
@@ -143,7 +139,6 @@ for i in range(len(region_names) - 1):
         round(random.uniform(200, 600), 1), "Active", "Overhead",
     ])
     lid += 1
- 
 
 border_links = [
     ("Bolgatanga", "Bolgatanga Interconnection", 9),
@@ -166,9 +161,7 @@ for src_name, dst_name, utility_id in border_links:
     ])
     lid += 1
  
-# ---------------------------------------------------------------------------
 # Write CSVs
-# ---------------------------------------------------------------------------
 with open("utilities.csv", "w", newline="") as f:
     w = csv.writer(f)
     w.writerow(["Utility ID", "Name", "Alias", "Code", "Type", "Country", "Active"])
@@ -185,61 +178,40 @@ with open("lines.csv", "w", newline="") as f:
     w.writerow(["Line ID", "Utility ID", "Source Substation ID", "Source Substation",
                 "Destination Substation ID", "Destination Substation", "Voltage (kV)",
                 "Length (km)", "Capacity (MVA)", "Status", "Line Type"])
-    w.writerows(lines)
- 
+    w.writerows(lines) 
 print(f"utilities: {len(utilities)} rows")
 print(f"substations: {len(substations)} rows")
 print(f"lines: {len(lines)} rows")
 
-
 import pandas as pd
 import numpy as np
 
-# -----------------------------------------------------------
-# STEP 1: Load the raw data
-# -----------------------------------------------------------
+# Load raw data
 utilities = pd.read_csv('utilities.csv')
 substations = pd.read_csv('substations.csv')
 lines = pd.read_csv('lines.csv')
 
-# -----------------------------------------------------------
-# STEP 2: Inspect before cleaning (baseline for your report)
-# -----------------------------------------------------------
+# Inspect before cleaning (baseline for report)
 print("=== BEFORE CLEANING ===\n")
-
 print("Missing Values - Utilities:")
 print(utilities.isnull().sum(), "\n")
-
 print("Missing Values - Substations:")
 print(substations.isnull().sum(), "\n")
-
 print("Missing Values - Lines:")
 print(lines.isnull().sum(), "\n")
-
 print("Duplicate Rows - Utilities:", utilities.duplicated().sum())
 print("Duplicate Rows - Substations:", substations.duplicated().sum())
 print("Duplicate Rows - Lines:", lines.duplicated().sum())
-
 print("\nData types before cleaning:")
 print(substations.dtypes, "\n")
 
-# -----------------------------------------------------------
-# STEP 3: Standardize missing-value indicators
-# -----------------------------------------------------------
-# Real-world registers often mark missing data with placeholders
-# instead of a true empty cell. Standardize all of these to NaN
-# so pandas treats them consistently.
+# Standardize missing-value indicators
 missing_indicators = ['\\N', 'NULL', 'null', '', ' ', 'N/A', 'n/a', 'NA']
-
 utilities = utilities.replace(missing_indicators, np.nan)
 substations = substations.replace(missing_indicators, np.nan)
 lines = lines.replace(missing_indicators, np.nan)
 
-# -----------------------------------------------------------
-# STEP 4: Fix data types (force numeric columns to be numeric)
-# -----------------------------------------------------------
-# errors='coerce' means: if a value can't be converted to a number,
-# replace it with NaN instead of crashing the whole column.
+# Fix data types
 substations['Latitude'] = pd.to_numeric(substations['Latitude'], errors='coerce')
 substations['Longitude'] = pd.to_numeric(substations['Longitude'], errors='coerce')
 substations['Voltage (kV)'] = pd.to_numeric(substations['Voltage (kV)'], errors='coerce')
@@ -250,15 +222,11 @@ lines['Voltage (kV)'] = pd.to_numeric(lines['Voltage (kV)'], errors='coerce')
 lines['Length (km)'] = pd.to_numeric(lines['Length (km)'], errors='coerce')
 lines['Capacity (MVA)'] = pd.to_numeric(lines['Capacity (MVA)'], errors='coerce')
 
-# -----------------------------------------------------------
-# STEP 5: Remove duplicate rows
-# -----------------------------------------------------------
+# Remove duplicate rows
 utilities = utilities.drop_duplicates()
 substations = substations.drop_duplicates()
 lines = lines.drop_duplicates()
 
-# Also check for duplicate IDs specifically (a duplicate ID is worse
-# than a duplicate full row — it breaks foreign-key relationships)
 dup_util_ids = utilities['Utility ID'].duplicated().sum()
 dup_sub_ids = substations['Substation ID'].duplicated().sum()
 dup_line_ids = lines['Line ID'].duplicated().sum()
@@ -266,63 +234,42 @@ print(f"\nDuplicate Utility IDs: {dup_util_ids}")
 print(f"Duplicate Substation IDs: {dup_sub_ids}")
 print(f"Duplicate Line IDs: {dup_line_ids}")
 
-# -----------------------------------------------------------
-# STEP 6: Validate foreign-key relationships
-# -----------------------------------------------------------
-# Every Source/Destination Substation ID in lines.csv must exist
-# in substations.csv, or the graph-building step later will break.
+# Validate foreign-key relationships
 valid_substation_ids = set(substations['Substation ID'])
-
 orphaned_sources = lines[~lines['Source Substation ID'].isin(valid_substation_ids)]
 orphaned_destinations = lines[~lines['Destination Substation ID'].isin(valid_substation_ids)]
-
 print(f"\nOrphaned source references: {len(orphaned_sources)}")
 print(f"Orphaned destination references: {len(orphaned_destinations)}")
 
-# Same check for Utility ID
 valid_utility_ids = set(utilities['Utility ID'])
 orphaned_utility_refs = lines[~lines['Utility ID'].isin(valid_utility_ids)]
 print(f"Orphaned utility references: {len(orphaned_utility_refs)}")
 
-# -----------------------------------------------------------
-# STEP 7: Validate geographic coordinates
-# -----------------------------------------------------------
-# West Africa roughly spans these lat/long bounds — anything outside
-# this range is almost certainly a data error, not a real location.
+# Validate geographic coordinates
 lat_min, lat_max = 4.0, 15.0
 lon_min, lon_max = -15.0, 5.0
-
 invalid_coords = substations[
     (substations['Latitude'] < lat_min) | (substations['Latitude'] > lat_max) |
     (substations['Longitude'] < lon_min) | (substations['Longitude'] > lon_max)
 ]
 print(f"\nSubstations with implausible coordinates: {len(invalid_coords)}")
 
-# -----------------------------------------------------------
-# STEP 8: Standardize categorical/text columns
-# -----------------------------------------------------------
-# Strip stray whitespace and normalize casing so "active", "Active ",
-# and "ACTIVE" aren't treated as three different categories.
+# Standardize categorical/text columns
+# Strip stray whitespace and normalize casing 
 substations['Status'] = substations['Status'].str.strip().str.title()
 substations['Region'] = substations['Region'].str.strip()
 lines['Status'] = lines['Status'].str.strip().str.title()
 lines['Line Type'] = lines['Line Type'].str.strip().str.title()
 
-# -----------------------------------------------------------
-# STEP 9: Verify after cleaning
-# -----------------------------------------------------------
+# Verify after cleaning
 print("\n=== AFTER CLEANING ===\n")
 print("Substations dtypes:")
 print(substations.dtypes, "\n")
-
 print("Remaining missing values - Substations:")
 print(substations.isnull().sum(), "\n")
 
-# -----------------------------------------------------------
-# STEP 10: Save the cleaned datasets
-# -----------------------------------------------------------
+# Save cleaned datasets
 utilities.to_csv('utilities_clean.csv', index=False)
 substations.to_csv('substations_clean.csv', index=False)
 lines.to_csv('lines_clean.csv', index=False)
-
 print("Cleaned datasets saved.")
